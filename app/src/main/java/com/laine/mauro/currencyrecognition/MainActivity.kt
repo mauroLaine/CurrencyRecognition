@@ -11,7 +11,10 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.label.ImageLabeling
+import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import kotlinx.android.synthetic.main.activity_main.*
@@ -82,7 +85,8 @@ class MainActivity : AppCompatActivity() {
                     val image: InputImage
                     try {
                         image = InputImage.fromFilePath(applicationContext, savedUri)
-                        runTextRecognition(image)
+                        //runTextRecognition(image)
+                        runImageRecognition(image)
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
@@ -98,6 +102,32 @@ class MainActivity : AppCompatActivity() {
             }
             .addOnFailureListener { e -> // Task failed with an exception
                 e.printStackTrace()
+            }
+    }
+
+    private fun runImageRecognition(inputImage: InputImage) {
+        val localModel = LocalModel.Builder()
+            .setAssetFilePath("mnasnet_1.3_224_1_metadata_1.tflite")
+            // or .setAbsoluteFilePath(absolute file path to model file)
+            // or .setUri(URI to model file)
+            .build()
+        val customImageLabelerOptions = CustomImageLabelerOptions.Builder(localModel)
+            .setConfidenceThreshold(0.5f)
+            .setMaxResultCount(5)
+            .build()
+        val labeler = ImageLabeling.getClient(customImageLabelerOptions)
+        labeler.process(inputImage)
+            .addOnSuccessListener { labels ->
+                for (label in labels) {
+                    val text = label.text
+                    val confidence = label.confidence
+                    val index = label.index
+                    Toast.makeText(baseContext, "Text FOUND " +  text, Toast.LENGTH_SHORT).show()
+                }
+
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Labels reading failed", e)
             }
     }
 

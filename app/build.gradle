@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -30,6 +31,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    aaptOptions {
+        noCompress "tflite"
+        // or noCompress "lite"
+    }
 }
 
 dependencies {
@@ -52,4 +58,11 @@ dependencies {
 
     // Text recognition dependencies
     implementation 'com.google.android.gms:play-services-mlkit-text-recognition:16.1.3'
+
+    // Image labeling feature with custom bundled model
+    implementation 'com.google.mlkit:image-labeling-custom:16.3.1'
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+    implementation 'com.google.firebase:firebase-analytics'
 }
