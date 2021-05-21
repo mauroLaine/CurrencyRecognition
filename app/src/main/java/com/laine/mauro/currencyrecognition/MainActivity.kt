@@ -107,13 +107,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun runImageRecognition(inputImage: InputImage) {
         val localModel = LocalModel.Builder()
-            .setAssetFilePath("mnasnet_1.3_224_1_metadata_1.tflite")
+            .setAssetFilePath(ML_MODEL)
             // or .setAbsoluteFilePath(absolute file path to model file)
             // or .setUri(URI to model file)
             .build()
         val customImageLabelerOptions = CustomImageLabelerOptions.Builder(localModel)
             .setConfidenceThreshold(0.5f)
-            .setMaxResultCount(5)
+            .setMaxResultCount(2)
             .build()
         val labeler = ImageLabeling.getClient(customImageLabelerOptions)
         labeler.process(inputImage)
@@ -231,6 +231,8 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "CameraXBasic"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+        // private const val ML_MODEL = "mnasnet_1.3_224_1_metadata_1.tflite"
+        private const val ML_MODEL = "model-export-icn-tflite-test_model-2021-05-21T15-59-20.568314Z-model.tflite"
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
