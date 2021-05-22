@@ -15,8 +15,6 @@ import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeling
 import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
-import com.google.mlkit.vision.text.Text
-import com.google.mlkit.vision.text.TextRecognition
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 import java.io.IOException
@@ -35,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         // Request camera permissions
         if (allPermissionsGranted()) {
             startCamera()
@@ -47,9 +44,22 @@ class MainActivity : AppCompatActivity() {
 
         // Set up the listener for take photo button
         camera_capture_button.setOnClickListener { takePhoto() }
-
         outputDirectory = getOutputDirectory()
         cameraExecutor = Executors.newSingleThreadExecutor()
+        setCurrencyValuesMap()
+    }
+
+    private fun setCurrencyValuesMap() {
+        currency_values_map.put("one_dollar_us", "One US dollar")
+        currency_values_map.put("fifty_pesos_mexico", "Fifty Mexican Pesos")
+        currency_values_map.put("one_cent_us", "One US cent")
+        currency_values_map.put("five_dollar_us", "Five US dollars")
+        currency_values_map.put("ten_dollar_us", "Ten US dollars")
+        currency_values_map.put("one_pound_egypt", "One Egyptian Pound")
+        currency_values_map.put("twenty_five_cents_us", "Twenty Five US Cents")
+        currency_values_map.put("twenty_dollar_us", "Twenty US dollars")
+        currency_values_map.put("two_dollar_us", "Two US dollar")
+        currency_values_map.put("ten_euro", "Ten Euro")
     }
 
     private fun takePhoto() {
@@ -81,11 +91,9 @@ class MainActivity : AppCompatActivity() {
                     val savedUri = Uri.fromFile(photoFile)
                     val msg = "Photo capture succeeded: $savedUri"
                     Log.d(TAG, msg)
-
                     val image: InputImage
                     try {
                         image = InputImage.fromFilePath(applicationContext, savedUri)
-                        //runTextRecognition(image)
                         runImageRecognition(image)
                     } catch (e: IOException) {
                         e.printStackTrace()
@@ -94,63 +102,34 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-    private fun runTextRecognition(inputImage: InputImage) {
-        val recognizer = TextRecognition.getClient()
-        recognizer.process(inputImage)
-            .addOnSuccessListener { texts ->
-                processTextRecognitionResult(texts)
-            }
-            .addOnFailureListener { e -> // Task failed with an exception
-                e.printStackTrace()
-            }
-    }
-
     private fun runImageRecognition(inputImage: InputImage) {
         val localModel = LocalModel.Builder()
             .setAssetFilePath(ML_MODEL)
-            // or .setAbsoluteFilePath(absolute file path to model file)
-            // or .setUri(URI to model file)
             .build()
         val customImageLabelerOptions = CustomImageLabelerOptions.Builder(localModel)
-            .setConfidenceThreshold(0.5f)
+            .setConfidenceThreshold(0.89f)
             .setMaxResultCount(2)
             .build()
         val labeler = ImageLabeling.getClient(customImageLabelerOptions)
         labeler.process(inputImage)
             .addOnSuccessListener { labels ->
+                if (labels.isEmpty()) {
+                    Toast.makeText(baseContext, "Object not found", Toast.LENGTH_SHORT)
+                        .show()
+                    return@addOnSuccessListener
+                }
                 for (label in labels) {
                     val text = label.text
                     val confidence = label.confidence
                     val index = label.index
-                    Toast.makeText(baseContext, "Text FOUND " +  text, Toast.LENGTH_SHORT).show()
+                    val mapValueString = currency_values_map.get(text)
+                    Toast.makeText(baseContext, "This is a " + mapValueString, Toast.LENGTH_SHORT)
+                        .show()
                 }
-
             }
             .addOnFailureListener { e ->
                 Log.e(TAG, "Labels reading failed", e)
             }
-    }
-
-    private fun processTextRecognitionResult(texts: Text) {
-        val blocks = texts.textBlocks
-        if (blocks.size == 0) {
-            Toast.makeText(baseContext, "Text not found", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        var textFound = ""
-        for (i in blocks.indices) {
-            val lines = blocks[i].lines
-            for (j in lines.indices) {
-                val elements = lines[j].elements
-                for (k in elements.indices) {
-                    textFound += " " + elements[k].text
-                }
-            }
-        }
-        Toast.makeText(baseContext, "Text found: " + textFound, Toast.LENGTH_SHORT).show()
-        camera_capture_button.text = "Identify another currency"
-        text_found.text = textFound
     }
 
     private fun startCamera() {
@@ -165,25 +144,20 @@ class MainActivity : AppCompatActivity() {
                 .also {
                     it.setSurfaceProvider(view_finder.surfaceProvider)
                 }
-
             imageCapture = ImageCapture.Builder()
                 .build()
-
             val imageAnalyzer = ImageAnalysis.Builder()
                 .build()
 
             // Select back camera as a default
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-
             try {
                 // Unbind use cases before rebinding
                 cameraProvider.unbindAll()
-
                 // Bind use cases to camera
                 cameraProvider.bindToLifecycle(
                     this, cameraSelector, preview, imageCapture, imageAnalyzer
                 )
-
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
             }
@@ -231,9 +205,11 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "CameraXBasic"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-        // private const val ML_MODEL = "mnasnet_1.3_224_1_metadata_1.tflite"
-        private const val ML_MODEL = "model-export-icn-tflite-test_model-2021-05-21T15-59-20.568314Z-model.tflite"
+        
+        private const val ML_MODEL =
+            "model-export-icn-tflite-accessible_currency_first_demo-2021-05-22T18-07-48.191833Z-model.tflite"
         private const val REQUEST_CODE_PERMISSIONS = 10
+        private val currency_values_map = mutableMapOf<Any, Any>()
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
 }
