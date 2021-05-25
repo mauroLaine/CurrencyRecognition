@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.accessibility.AccessibilityEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Set up the listener for take photo button
-        camera_capture_button.setOnClickListener { takePhoto() }
+        view_finder.setOnClickListener { takePhoto() }
         outputDirectory = getOutputDirectory()
         cameraExecutor = Executors.newSingleThreadExecutor()
         setCurrencyValuesMap()
@@ -65,6 +66,8 @@ class MainActivity : AppCompatActivity() {
     private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
+        camera_capture_text_view.text = "Loading..."
+        camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
 
         // Create time-stamped output file to hold the image
         val photoFile = File(
@@ -107,15 +110,16 @@ class MainActivity : AppCompatActivity() {
             .setAssetFilePath(ML_MODEL)
             .build()
         val customImageLabelerOptions = CustomImageLabelerOptions.Builder(localModel)
-            .setConfidenceThreshold(0.89f)
+            .setConfidenceThreshold(0.5f)
             .setMaxResultCount(2)
             .build()
         val labeler = ImageLabeling.getClient(customImageLabelerOptions)
         labeler.process(inputImage)
             .addOnSuccessListener { labels ->
                 if (labels.isEmpty()) {
-                    Toast.makeText(baseContext, "Object not found", Toast.LENGTH_SHORT)
-                        .show()
+                    camera_capture_text_view.text =
+                        "Object not found. \r\n\n Touch the screen to identify the currency at the camera"
+                    camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                     return@addOnSuccessListener
                 }
                 for (label in labels) {
@@ -123,8 +127,9 @@ class MainActivity : AppCompatActivity() {
                     val confidence = label.confidence
                     val index = label.index
                     val mapValueString = currency_values_map.get(text)
-                    Toast.makeText(baseContext, "This is a " + mapValueString, Toast.LENGTH_SHORT)
-                        .show()
+                    camera_capture_text_view.text =
+                        "This is a " + mapValueString + ". \r\n\n Touch the screen to identify the currency at the camera"
+                    camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                 }
             }
             .addOnFailureListener { e ->
@@ -205,7 +210,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "CameraXBasic"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-        
+
         private const val ML_MODEL =
             "model-export-icn-tflite-accessible_currency_first_demo-2021-05-22T18-07-48.191833Z-model.tflite"
         private const val REQUEST_CODE_PERMISSIONS = 10
