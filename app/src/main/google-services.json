@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1032048317449",
+    "project_id": "accessible-currency-b1034",
+    "storage_bucket": "accessible-currency-b1034.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032048317449:android:dffe7183e45985b485d4d8",
+        "android_client_info": {
+          "package_name": "com.laine.mauro.currencyrecognition"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032048317449-r78n84k2hp7v9is08tq42agjta3poreq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZCFzvL-teRNTkL_MYuS7i_BLouPSLyGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032048317449-r78n84k2hp7v9is08tq42agjta3poreq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
