@@ -66,8 +66,8 @@ class MainActivity : AppCompatActivity() {
     private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
-        Toast.makeText(baseContext, "Loading...", Toast.LENGTH_SHORT)
-            .show()
+        camera_capture_text_view.text = "Loading..."
+        camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
 
         // Create time-stamped output file to hold the image
         val photoFile = File(
@@ -117,8 +117,9 @@ class MainActivity : AppCompatActivity() {
         labeler.process(inputImage)
             .addOnSuccessListener { labels ->
                 if (labels.isEmpty()) {
-                    camera_capture_text_view.text = "Object not found. \r\n\n Touch the screen to identify the currency at the camera"
-                    camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+                    camera_capture_text_view.text =
+                        "Object not found. \r\n\n Touch the screen to identify the currency at the camera"
+                    camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                     return@addOnSuccessListener
                 }
                 for (label in labels) {
@@ -126,8 +127,9 @@ class MainActivity : AppCompatActivity() {
                     val confidence = label.confidence
                     val index = label.index
                     val mapValueString = currency_values_map.get(text)
-                    camera_capture_text_view.text = "This is a " + mapValueString + ". \r\n\n Touch the screen to identify the currency at the camera"
-                    camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+                    camera_capture_text_view.text =
+                        "This is a " + mapValueString + ". \r\n\n Touch the screen to identify the currency at the camera"
+                    camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                 }
             }
             .addOnFailureListener { e ->
