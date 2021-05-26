@@ -6,30 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/camera_capture_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        tools:text = "Andas"
-        android:textSize="18sp"
-        android:background="@color/white"
-        android:contentDescription=""
-        android:elevation="2dp"
-        android:padding="20dp"
-        android:scaleType="fitCenter"
-        android:text="Touch the screen to identify the currency at the camera"
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/horizontal_margin"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:paddingEnd="@dimen/button_padding"
+        android:paddingStart="@dimen/button_padding"
+        android:text="@string/start"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_text_size"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleImage" />
 
-
-    <androidx.camera.view.PreviewView
-        android:id="@+id/view_finder"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="touch the screen to identify the currency at the camera"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-236dp" />
+    <ImageView
+        android:id="@+id/titleImage"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_header_height"
+        android:layout_marginEnd="@dimen/horizontal_margin"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/startButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/money" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

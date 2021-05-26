@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RecognitionActivity">
+
+    <TextView
+        android:id="@+id/camera_capture_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@color/white"
+        android:contentDescription=""
+        android:elevation="2dp"
+        android:padding="20dp"
+        android:scaleType="fitCenter"
+        android:text="@string/camera_instructions"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="Andas" />
+
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/view_finder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="touch the screen to identify the currency at the camera"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-236dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
