@@ -2,6 +2,8 @@ package com.laine.mauro.currencyrecognition
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.accessibility.AccessibilityManager
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +22,22 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         setViews()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        getMenuInflater().inflate(R.menu.overflow_menu, menu);
+        return (super.onCreateOptionsMenu(menu));
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            R.id.AboutActivity -> {
+                val intent = Intent(this, AboutActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setViews() {
