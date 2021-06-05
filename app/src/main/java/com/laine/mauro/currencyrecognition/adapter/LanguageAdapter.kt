@@ -1,4 +1,4 @@
-package com.laine.mauro.currencyrecognition.activity.adapter
+package com.laine.mauro.currencyrecognition.adapter
 
 import android.app.Activity
 import android.content.Context
@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.laine.mauro.currencyrecognition.R
 import com.laine.mauro.currencyrecognition.saveSelectedLanguage
-
 
 class LanguageAdapter(val context: Context) :
     RecyclerView.Adapter<LanguageAdapter.SimpleViewHolder>() {

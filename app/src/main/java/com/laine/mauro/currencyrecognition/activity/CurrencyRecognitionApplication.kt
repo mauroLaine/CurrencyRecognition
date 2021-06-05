@@ -1,4 +1,4 @@
-package com.laine.mauro.currencyrecognition
+package com.laine.mauro.currencyrecognition.activity
 
 import android.app.Application
 
