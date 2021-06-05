@@ -15,7 +15,9 @@ import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeling
 import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
+import com.laine.mauro.currencyrecognition.FLASHLIGHT_KEY
 import com.laine.mauro.currencyrecognition.R
+import com.laine.mauro.currencyrecognition.readBooleanConfiguration
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_recognition.*
 import java.io.File
@@ -24,7 +26,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-
 
 class RecognitionActivity : BaseActivity() {
     private var imageCapture: ImageCapture? = null
@@ -159,9 +160,15 @@ class RecognitionActivity : BaseActivity() {
                 // Unbind use cases before rebinding
                 cameraProvider.unbindAll()
                 // Bind use cases to camera
-                cameraProvider.bindToLifecycle(
+                val camera = cameraProvider.bindToLifecycle(
                     this, cameraSelector, preview, imageCapture, imageAnalyzer
                 )
+
+                // Enable or disable the flash unit
+                val isFlashlightEnabled: Boolean = readBooleanConfiguration(this, FLASHLIGHT_KEY)
+                if (isFlashlightEnabled && camera.cameraInfo.hasFlashUnit()) {
+                    camera.cameraControl.enableTorch(true)
+                }
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
             }

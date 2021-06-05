@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.laine.mauro.currencyrecognition.R
 import com.laine.mauro.currencyrecognition.saveSelectedLanguage
 
-
 class LanguageAdapter(val context: Context) :
     RecyclerView.Adapter<LanguageAdapter.SimpleViewHolder>() {
 
