@@ -24,7 +24,7 @@ fun View.setAccessibleButton() {
 }
 
 fun saveSelectedLanguage(activityContext: Activity, languageKey: String) {
-    val sharedPref = activityContext?.getPreferences(Context.MODE_PRIVATE) ?: return
+    val sharedPref = activityContext.getPreferences(Context.MODE_PRIVATE) ?: return
     with(sharedPref.edit()) {
         putString(LANGUAGE_KEY, languageKey)
         apply()
@@ -32,7 +32,12 @@ fun saveSelectedLanguage(activityContext: Activity, languageKey: String) {
 }
 
 fun readSelectedLanguage(activityContext: Activity): String? {
-    val sharedPref = activityContext?.getPreferences(Context.MODE_PRIVATE)
+    val sharedPref = activityContext.getPreferences(Context.MODE_PRIVATE)
     return sharedPref.getString(LANGUAGE_KEY, DEFAULT_LANGUAGE)
 }
 
+fun getStringResourceByName(activityContext: Activity, stringName: String): String? {
+    val resId =
+        activityContext.resources.getIdentifier(stringName, "string", activityContext.packageName)
+    return activityContext.getString(resId)
+}

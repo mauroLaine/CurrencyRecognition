@@ -11,6 +11,7 @@
     <string name="flashlight">Linterna</string>
     <string name="wallet">Wallet</string>
     <string name="select_the_language">Seleccione el idioma </string>
+    <string name="language_changed">El idioma cambió, reinicie la aplicación. </string>
 
     <!-- Currecny Values -->
     <string name="one_cent_us">un centavo estadounidense</string>

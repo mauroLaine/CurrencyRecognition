@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.laine.mauro.currencyrecognition.R
+import com.laine.mauro.currencyrecognition.getStringResourceByName
 import com.laine.mauro.currencyrecognition.saveSelectedLanguage
 
 
@@ -51,6 +53,8 @@ class LanguageAdapter(val context: Context) :
                 val language: String? = languageKeys.get(languages.get(position))
                 language?.let { key ->
                     saveSelectedLanguage(context as Activity, key)
+                    val message = getStringResourceByName(context, "language_changed")
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show()
                 }
             }
         }

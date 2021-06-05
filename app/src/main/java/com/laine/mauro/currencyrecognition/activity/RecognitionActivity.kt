@@ -1,6 +1,7 @@
 package com.laine.mauro.currencyrecognition.activity
 
 import android.Manifest
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
@@ -16,6 +17,7 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeling
 import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
 import com.laine.mauro.currencyrecognition.R
+import com.laine.mauro.currencyrecognition.getStringResourceByName
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_recognition.*
 import java.io.File
@@ -46,7 +48,8 @@ class RecognitionActivity : BaseActivity() {
 
         // Set up the listener for take photo button
         view_finder.setOnClickListener { takePhoto() }
-        view_finder.contentDescription = getStringResourceByName("camera_instructions")
+        view_finder.contentDescription =
+            getStringResourceByName(this as Activity, "camera_instructions")
         outputDirectory = getOutputDirectory()
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
@@ -54,7 +57,7 @@ class RecognitionActivity : BaseActivity() {
     private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
-        camera_capture_text_view.text = getStringResourceByName("loading")
+        camera_capture_text_view.text = getStringResourceByName(this as Activity, "loading")
         camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
 
         // Create time-stamped output file to hold the image
@@ -106,8 +109,11 @@ class RecognitionActivity : BaseActivity() {
             .addOnSuccessListener { labels ->
                 if (labels.isEmpty()) {
                     camera_capture_text_view.text =
-                        getStringResourceByName("object_not_found") + " \r\n\n " + getStringResourceByName(
-                            "camera_instructions"
+                        getStringResourceByName(
+                            this as Activity,
+                            "object_not_found"
+                        ) + " \r\n\n " + getStringResourceByName(
+                            this as Activity, "camera_instructions"
                         )
                     camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                     return@addOnSuccessListener
@@ -116,17 +122,23 @@ class RecognitionActivity : BaseActivity() {
                     val text = label.text
                     val confidence = label.confidence
                     val index = label.index
-                    val valueFromStrings = getStringResourceByName(text)
+                    val valueFromStrings = getStringResourceByName(this as Activity,text)
                     if (valueFromStrings.isNullOrBlank()) {
                         camera_capture_text_view.text =
-                            getStringResourceByName("object_not_found") + " \r\n\n " + getStringResourceByName(
-                                "camera_instructions"
+                            getStringResourceByName(
+                                this as Activity,
+                                "object_not_found"
+                            ) + " \r\n\n " + getStringResourceByName(
+                                this as Activity, "camera_instructions"
                             )
                         return@addOnSuccessListener
                     }
                     camera_capture_text_view.text =
-                        getStringResourceByName("this_is_a") + " " + valueFromStrings + ". \r\n\n " + getStringResourceByName(
-                            "camera_instructions"
+                        getStringResourceByName(
+                            this as Activity,
+                            "this_is_a"
+                        ) + " " + valueFromStrings + ". \r\n\n " + getStringResourceByName(
+                            this as Activity, "camera_instructions"
                         )
                     camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                 }
