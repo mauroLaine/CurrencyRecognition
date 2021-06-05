@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">CurrencyRecognition</string>
+    <string name="app_name">Accessible Currency</string>
     <string name="start">Start</string>
+    <string name="loading">Loading...</string>
     <string name="camera_instructions">Touch the screen to identify the currency at the camera</string>
+    <string name="object_not_found">Object not found.</string>
+    <string name="this_is_a">This is a</string>
+
+
 </resources>

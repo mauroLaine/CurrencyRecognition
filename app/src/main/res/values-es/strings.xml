@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Accessible Currency</string>
+    <string name="start">Inicio</string>
+    <string name="loading">Cargando...</string>
+    <string name="camera_instructions">Toque la pantalla para identificar la moneda o billete en la cámara </string>
+    <string name="object_not_found">No se econtró objeto.</string>
+    <string name="this_is_a">Este es un</string>
+
+
+</resources>

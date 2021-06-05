@@ -1,13 +1,13 @@
-package com.laine.mauro.currencyrecognition
+package com.laine.mauro.currencyrecognition.activity
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
@@ -16,6 +16,8 @@ import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeling
 import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
+import com.laine.mauro.currencyrecognition.R
+import com.laine.mauro.currencyrecognition.manager.LanguageManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_recognition.*
 import java.io.File
@@ -26,7 +28,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-class RecognitionActivity : AppCompatActivity() {
+class RecognitionActivity : BaseActivity() {
     private var imageCapture: ImageCapture? = null
 
     private lateinit var outputDirectory: File
@@ -35,6 +37,8 @@ class RecognitionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recognition)
+        LanguageManager.setLocale(this, LanguageManager.CODE_SPANISH)
+
         // Request camera permissions
         if (allPermissionsGranted()) {
             startCamera()
@@ -67,7 +71,7 @@ class RecognitionActivity : AppCompatActivity() {
     private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
-        camera_capture_text_view.text = "Loading..."
+        camera_capture_text_view.text = getStringResourceByName("loading")
         camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
 
         // Create time-stamped output file to hold the image
@@ -119,7 +123,9 @@ class RecognitionActivity : AppCompatActivity() {
             .addOnSuccessListener { labels ->
                 if (labels.isEmpty()) {
                     camera_capture_text_view.text =
-                        "Object not found. \r\n\n Touch the screen to identify the currency at the camera"
+                        Resources.getSystem()
+                            .getString(R.string.object_not_found) + " \r\n\n " + Resources.getSystem()
+                            .getString(R.string.camera_instructions)
                     camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                     return@addOnSuccessListener
                 }
@@ -129,7 +135,9 @@ class RecognitionActivity : AppCompatActivity() {
                     val index = label.index
                     val mapValueString = currency_values_map.get(text)
                     camera_capture_text_view.text =
-                        "This is a " + mapValueString + ". \r\n\n Touch the screen to identify the currency at the camera"
+                        Resources.getSystem()
+                            .getString(R.string.this_is_a) + mapValueString + ". \r\n\n " + Resources.getSystem()
+                            .getString(R.string.camera_instructions)
                     camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                 }
             }
