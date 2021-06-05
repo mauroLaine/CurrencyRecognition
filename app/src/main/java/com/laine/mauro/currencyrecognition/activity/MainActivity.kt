@@ -6,7 +6,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.accessibility.AccessibilityManager
+import com.laine.mauro.currencyrecognition.AboutActivity
 import com.laine.mauro.currencyrecognition.R
+import com.laine.mauro.currencyrecognition.SettingsActivity
 import com.laine.mauro.currencyrecognition.setAccessibleButton
 import kotlinx.android.synthetic.main.activity_main.*
 
