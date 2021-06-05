@@ -6,4 +6,6 @@
     <dimen name="image_header_height">192dp</dimen>
     <dimen name="text_view_margin_top">56dp</dimen>
     <dimen name="switch_padding">50dp</dimen>
+    <dimen name="medium_padding">48dp</dimen>
+    <dimen name="small_padding">16dp</dimen>
 </resources>
