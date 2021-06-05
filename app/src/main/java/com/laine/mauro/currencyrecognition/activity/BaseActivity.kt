@@ -1,22 +1,18 @@
 package com.laine.mauro.currencyrecognition.activity
 
-import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.laine.mauro.currencyrecognition.manager.LanguageManager
+import com.laine.mauro.currencyrecognition.readSelectedLanguage
 
 /**
  * Base Activity designed to wrap general behaviors
  */
 open class BaseActivity : AppCompatActivity() {
 
-    fun Context.getStringResourceByName(stringName: String): String? {
-        val resId = resources.getIdentifier(stringName, "string", packageName)
-        return getString(resId)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        LanguageManager.setLocale(this, LanguageManager.CODE_US)
+        val languageCode = readSelectedLanguage(this)
+        LanguageManager.setLocale(this, languageCode)
     }
 }
