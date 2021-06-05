@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Accessible Currency</string>
+    <string name="start">Inicio</string>
+    <string name="loading">Loading...</string>
+    <string name="camera_instructions">Touchez l\'écran pour identifier la pièce ou le billet sur l\'appareil photo </string>
+        <string name="object_not_found">Aucun objet n\'a été trouvé.</string>
+    <string name="this_is_a">Ceci est</string>
+
+    <!-- Currecny Values -->
+    <string name="one_cent_us">un sou américain </string>
+    <string name="five_cent_us">cinq cents américains </string>
+    <string name="ten_cent_us">un centime américain</string>
+    <string name="twenty_five_cent_us">vingt cinq cents américains </string>
+    <string name="fifty_cent_us">cinquante cents américains </string>
+    <string name="one_dollar_us">un dollar américain </string>
+    <string name="two_dollar_us">deux dollars américains </string>
+    <string name="five_dollar_us">cinq dollars américains </string>
+    <string name="ten_dollar_us">dix dollars américains </string>
+    <string name="twenty_dollar_us">vingt dollars américains </string>
+    <string name="fifty_dollar_us">cinquante dollars américains </string>
+    <string name="one_hundred_us">cent dollars américains </string>
+    <string name="one_pound_egypt">une livre égyptienne </string>
+    <string name="ten_euro">dix euros</string>
+
+</resources>
