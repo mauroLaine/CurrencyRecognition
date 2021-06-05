@@ -27,7 +27,6 @@
         android:id="@+id/view_finder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="touch the screen to identify the currency at the camera"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-236dp" />
 

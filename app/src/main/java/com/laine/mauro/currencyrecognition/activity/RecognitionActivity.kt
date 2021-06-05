@@ -2,7 +2,6 @@ package com.laine.mauro.currencyrecognition.activity
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -17,7 +16,6 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeling
 import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
 import com.laine.mauro.currencyrecognition.R
-import com.laine.mauro.currencyrecognition.manager.LanguageManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_recognition.*
 import java.io.File
@@ -37,8 +35,6 @@ class RecognitionActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recognition)
-        LanguageManager.setLocale(this, LanguageManager.CODE_SPANISH)
-
         // Request camera permissions
         if (allPermissionsGranted()) {
             startCamera()
@@ -50,22 +46,9 @@ class RecognitionActivity : BaseActivity() {
 
         // Set up the listener for take photo button
         view_finder.setOnClickListener { takePhoto() }
+        view_finder.contentDescription = getStringResourceByName("camera_instructions")
         outputDirectory = getOutputDirectory()
         cameraExecutor = Executors.newSingleThreadExecutor()
-        setCurrencyValuesMap()
-    }
-
-    private fun setCurrencyValuesMap() {
-        currency_values_map.put("one_dollar_us", "One US dollar")
-        currency_values_map.put("fifty_pesos_mexico", "Fifty Mexican Pesos")
-        currency_values_map.put("one_cent_us", "One US cent")
-        currency_values_map.put("five_dollar_us", "Five US dollars")
-        currency_values_map.put("ten_dollar_us", "Ten US dollars")
-        currency_values_map.put("one_pound_egypt", "One Egyptian Pound")
-        currency_values_map.put("twenty_five_cents_us", "Twenty Five US Cents")
-        currency_values_map.put("twenty_dollar_us", "Twenty US dollars")
-        currency_values_map.put("two_dollar_us", "Two US dollar")
-        currency_values_map.put("ten_euro", "Ten Euro")
     }
 
     private fun takePhoto() {
@@ -123,9 +106,9 @@ class RecognitionActivity : BaseActivity() {
             .addOnSuccessListener { labels ->
                 if (labels.isEmpty()) {
                     camera_capture_text_view.text =
-                        Resources.getSystem()
-                            .getString(R.string.object_not_found) + " \r\n\n " + Resources.getSystem()
-                            .getString(R.string.camera_instructions)
+                        getStringResourceByName("object_not_found") + " \r\n\n " + getStringResourceByName(
+                            "camera_instructions"
+                        )
                     camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                     return@addOnSuccessListener
                 }
@@ -133,11 +116,18 @@ class RecognitionActivity : BaseActivity() {
                     val text = label.text
                     val confidence = label.confidence
                     val index = label.index
-                    val mapValueString = currency_values_map.get(text)
+                    val valueFromStrings = getStringResourceByName(text)
+                    if (valueFromStrings.isNullOrBlank()) {
+                        camera_capture_text_view.text =
+                            getStringResourceByName("object_not_found") + " \r\n\n " + getStringResourceByName(
+                                "camera_instructions"
+                            )
+                        return@addOnSuccessListener
+                    }
                     camera_capture_text_view.text =
-                        Resources.getSystem()
-                            .getString(R.string.this_is_a) + mapValueString + ". \r\n\n " + Resources.getSystem()
-                            .getString(R.string.camera_instructions)
+                        getStringResourceByName("this_is_a") + " " + valueFromStrings + ". \r\n\n " + getStringResourceByName(
+                            "camera_instructions"
+                        )
                     camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                 }
             }
@@ -223,7 +213,6 @@ class RecognitionActivity : BaseActivity() {
         private const val ML_MODEL =
             "model-export-icn-tflite-accessible_currency_first_demo-2021-05-22T18-07-48.191833Z-model.tflite"
         private const val REQUEST_CODE_PERMISSIONS = 10
-        private val currency_values_map = mutableMapOf<Any, Any>()
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
 }

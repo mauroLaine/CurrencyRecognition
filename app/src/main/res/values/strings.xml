@@ -6,5 +6,19 @@
     <string name="object_not_found">Object not found.</string>
     <string name="this_is_a">This is a</string>
 
-
+    <!-- Currency Values from ML model -->
+    <string name="one_cent_us">one US cent</string>
+    <string name="five_cent_us">five cents coin</string>
+    <string name="ten_cent_us">ten cents coin</string>
+    <string name="twenty_five_cent_us">twenty cents coin</string>
+    <string name="fifty_cent_us">fifty cents coin</string>
+    <string name="one_dollar_us">one US dollar</string>
+    <string name="two_dollar_us">two US dollars bill</string>
+    <string name="five_dollar_us">five US dollars bill</string>
+    <string name="ten_dollar_us">ten US dollars bill</string>
+    <string name="twenty_dollar_us">twenty US dollars bill</string>
+    <string name="fifty_dollar_us">fifty US dollars bill</string>
+    <string name="one_hundred_us">one hundred US dollars bill</string>
+    <string name="one_pound_egypt">one Egyptian pound bill</string>
+    <string name="ten_euro">ten Euro bill</string>
 </resources>

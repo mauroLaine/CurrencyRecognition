@@ -4,7 +4,22 @@
     <string name="loading">Cargando...</string>
     <string name="camera_instructions">Toque la pantalla para identificar la moneda o billete en la cámara </string>
     <string name="object_not_found">No se econtró objeto.</string>
-    <string name="this_is_a">Este es un</string>
+    <string name="this_is_a">Este es</string>
 
+    <!-- Currecny Values -->
+    <string name="one_cent_us">un centavo estadounidense</string>
+    <string name="five_cent_us">cinco centavos estadounidenses</string>
+    <string name="ten_cent_us">diez centavos estadounidenses</string>
+    <string name="twenty_five_cent_us">venticinco centavos estadounidenses</string>
+    <string name="fifty_cent_us">cincuenta centavos estadounidenses</string>
+    <string name="one_dollar_us">un dollar estadounidense</string>
+    <string name="two_dollar_us">dos dollares estadounidenses</string>
+    <string name="five_dollar_us">cinco dollares estadounidenses</string>
+    <string name="ten_dollar_us">diez dollares estadounidenses</string>
+    <string name="twenty_dollar_us">veinte dollares estadounidenses</string>
+    <string name="fifty_dollar_us">cincuenta dollares estadounidenses</string>
+    <string name="one_hundred_us">cien dollares estadounidenses</string>
+    <string name="one_pound_egypt">una libra Egipcia</string>
+    <string name="ten_euro">diez Euros</string>
 
 </resources>
