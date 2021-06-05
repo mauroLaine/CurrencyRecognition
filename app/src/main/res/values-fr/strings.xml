@@ -5,6 +5,12 @@
     <string name="camera_instructions">Touchez l\'écran pour identifier la pièce ou le billet sur l\'appareil photo </string>
         <string name="object_not_found">Aucun objet n\'a été trouvé.</string>
     <string name="this_is_a">Ceci est</string>
+    <string name="about_content">Ce projet vise à fournir un outil aux personnes BLV pour améliorer leur interaction avec la monnaie via une application mobile en plusieurs langues.\n\nLes personnes aveugles et malvoyantes peuvent utiliser cette application comme outil pour identifier et gérer le montant d'argent dont elles disposent. dans leur poche. </string>
+    <string name="settings">Paramètres </string>
+    <string name="about">À propos </string>
+    <string name="flashlight">Lampe de poche </string>
+    <string name="wallet">Wallet</string>
+    <string name="select_the_language">Sélectionnez la langue </string>
 
     <!-- Currecny Values -->
     <string name="one_cent_us">un sou américain </string>
