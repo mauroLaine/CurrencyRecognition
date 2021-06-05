@@ -17,14 +17,14 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val flashlightMode = readBooleanConfiguration(this, FLASHLIGHT_KEY)
-        switchFlashlight.isChecked = flashlightMode
+        val isFlashlightEnabled = readBooleanConfiguration(this, FLASHLIGHT_KEY)
+        switchFlashlight.isChecked = isFlashlightEnabled
         switchFlashlight.setOnCheckedChangeListener { _, isChecked ->
             saveBooleanConfiguration(this, FLASHLIGHT_KEY, isChecked)
         }
 
-        val walletMode = readBooleanConfiguration(this, WALLET_KEY)
-        switchWallet.isChecked = walletMode
+        val isWalletEnabled = readBooleanConfiguration(this, WALLET_KEY)
+        switchWallet.isChecked = isWalletEnabled
         switchWallet.setOnCheckedChangeListener { _, isChecked ->
             saveBooleanConfiguration(this, WALLET_KEY, isChecked)
         }
