@@ -5,6 +5,12 @@
     <string name="camera_instructions">Touch the screen to identify the currency at the camera</string>
     <string name="object_not_found">Object not found.</string>
     <string name="this_is_a">This is a</string>
+    <string name="about_content">This project aims to provide a tool for BLV people to improve their interaction with currency via a mobile app in multiple languages.\n\nBlind and vision-impaired people can use this app as a tool to identify and manage the amount of cash they have in their pocket.</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="flashlight">Flashlight</string>
+    <string name="wallet">Wallet</string>
+    <string name="select_the_language">Select the language</string>
 
     <!-- Currency Values from ML model -->
     <string name="one_cent_us">one US cent</string>
@@ -21,4 +27,5 @@
     <string name="one_hundred_us">one hundred US dollars bill</string>
     <string name="one_pound_egypt">one Egyptian pound bill</string>
     <string name="ten_euro">ten Euro bill</string>
+
 </resources>

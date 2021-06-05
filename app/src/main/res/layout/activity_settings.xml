@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
+
+    <Switch
+        android:id="@+id/switchFlashlight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/button_padding"
+        android:layout_marginTop="@dimen/text_view_margin_top"
+        android:text="@string/flashlight"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSettings" />
+
+    <Switch
+        android:id="@+id/switchWallet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/button_padding"
+        android:layout_marginTop="@dimen/text_view_margin_top"
+        android:text="@string/wallet"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchFlashlight" />
+
+    <TextView
+        android:id="@+id/textViewLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/button_padding"
+        android:layout_marginTop="@dimen/text_view_margin_top"
+        android:text="@string/select_the_language"
+        android:textColor="@color/black"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchWallet" />
+
+    <TextView
+        android:id="@+id/textViewSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/button_padding"
+        android:layout_marginTop="@dimen/text_view_margin_top"
+        android:text="@string/settings"
+        android:textColor="@color/purple_700"
+        android:textSize="@dimen/button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
