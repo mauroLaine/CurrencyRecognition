@@ -6,11 +6,16 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.accessibility.AccessibilityManager
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.ui.AppBarConfiguration
 import com.laine.mauro.currencyrecognition.R
 import com.laine.mauro.currencyrecognition.setAccessibleButton
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
