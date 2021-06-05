@@ -10,8 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CurrencyRecognition">
         <activity
-            android:name=".AboutActivity"
+            android:name=".SettingsActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".AboutActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".RecognitionActivity"
             android:configChanges="orientation|keyboardHidden"
