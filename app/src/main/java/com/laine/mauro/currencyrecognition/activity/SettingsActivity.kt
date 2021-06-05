@@ -3,8 +3,9 @@ package com.laine.mauro.currencyrecognition.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.laine.mauro.currencyrecognition.R
-import kotlinx.android.synthetic.main.rv_language_row.*
+import com.laine.mauro.currencyrecognition.*
+import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.rv_language_row.textViewLanguage
 
 class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,6 +15,18 @@ class SettingsActivity : AppCompatActivity() {
         textViewLanguage.setOnClickListener {
             val intent = Intent(this, LanguageActivity::class.java)
             startActivity(intent)
+        }
+
+        val flashlightMode = readBooleanConfiguration(this, FLASHLIGHT_KEY)
+        switchFlashlight.isChecked = flashlightMode
+        switchFlashlight.setOnCheckedChangeListener { _, isChecked ->
+            saveBooleanConfiguration(this, FLASHLIGHT_KEY, isChecked)
+        }
+
+        val walletMode = readBooleanConfiguration(this, WALLET_KEY)
+        switchWallet.isChecked = walletMode
+        switchWallet.setOnCheckedChangeListener { _, isChecked ->
+            saveBooleanConfiguration(this, WALLET_KEY, isChecked)
         }
     }
 }
