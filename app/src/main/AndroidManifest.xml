@@ -3,6 +3,7 @@
     package="com.laine.mauro.currencyrecognition">
 
     <application
+        android:name="com.laine.mauro.currencyrecognition.CurrencyRecognitionApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,6 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CurrencyRecognition">
         <activity
+            android:name=".activity.RecognitionActivity"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:name=".LanguageActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -22,7 +25,10 @@
             android:name=".RecognitionActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".MainActivity">
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:configChanges="locale">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
