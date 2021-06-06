@@ -35,7 +35,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ac_logo" />
+        app:srcCompat="@drawable/money" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
