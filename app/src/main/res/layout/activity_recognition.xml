@@ -22,7 +22,6 @@
         app:layout_constraintRight_toRightOf="parent"
         tools:text="Andas" />
 
-
     <androidx.camera.view.PreviewView
         android:id="@+id/view_finder"
         android:layout_width="match_parent"
