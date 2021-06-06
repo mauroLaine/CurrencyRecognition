@@ -47,6 +47,7 @@ class LanguageAdapter(val context: Context) :
     inner class SimpleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val textViewLanguage: TextView = itemView.findViewById(R.id.textViewLanguage)
+        private val languageRow: View = itemView.findViewById(R.id.languageRow)
 
         fun bindData(language: String, position: Int) {
             val currentLanguage = readSelectedLanguage(context as Activity)
@@ -60,7 +61,7 @@ class LanguageAdapter(val context: Context) :
                     )
                 )
             }
-            textViewLanguage.setOnClickListener {
+            languageRow.setOnClickListener {
                 val language: String? = languageKeys.get(languages.get(position))
                 language?.let { key ->
                     saveSelectedLanguage(context, key)
