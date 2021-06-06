@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.laine.mauro.currencyrecognition.R
 import com.laine.mauro.currencyrecognition.getStringResourceByName
+import com.laine.mauro.currencyrecognition.readSelectedLanguage
 import com.laine.mauro.currencyrecognition.saveSelectedLanguage
 
 class LanguageAdapter(val context: Context) :
@@ -45,13 +47,24 @@ class LanguageAdapter(val context: Context) :
     inner class SimpleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val textViewLanguage: TextView = itemView.findViewById(R.id.textViewLanguage)
+        private val languageRow: View = itemView.findViewById(R.id.languageRow)
 
         fun bindData(language: String, position: Int) {
+            val currentLanguage = readSelectedLanguage(context as Activity)
             textViewLanguage.text = language
-            textViewLanguage.setOnClickListener {
+            val rowLanguage: String? = languageKeys.get(languages.get(position))
+            if (currentLanguage.equals(rowLanguage)) {
+                textViewLanguage.setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.ac_light_blue
+                    )
+                )
+            }
+            languageRow.setOnClickListener {
                 val language: String? = languageKeys.get(languages.get(position))
                 language?.let { key ->
-                    saveSelectedLanguage(context as Activity, key)
+                    saveSelectedLanguage(context, key)
                     val message = getStringResourceByName(context, "language_changed")
                     Toast.makeText(context, message, Toast.LENGTH_LONG).show()
                 }

@@ -16,12 +16,12 @@
         android:padding="20dp"
         android:scaleType="fitCenter"
         android:text="@string/camera_instructions"
+        android:textColor="@color/ac_dark_blue"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:text="Andas" />
-
 
     <androidx.camera.view.PreviewView
         android:id="@+id/view_finder"

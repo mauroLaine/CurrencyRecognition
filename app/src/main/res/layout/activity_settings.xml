@@ -50,7 +50,7 @@
         android:layout_marginLeft="@dimen/button_padding"
         android:layout_marginTop="@dimen/text_view_margin_top"
         android:text="@string/settings"
-        android:textColor="@color/purple_700"
+        android:textColor="@color/ac_dark_blue_secondary"
         android:textSize="@dimen/button_text_size"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
