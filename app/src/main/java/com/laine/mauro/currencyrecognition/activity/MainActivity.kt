@@ -20,8 +20,6 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        titleImage.contentDescription = this.getString(R.string.start)
-//        titleImage.setAccessibleButton()
 
         drawerLayout = findViewById(R.id.drawerLayout)
         val navController = this.findNavController(R.id.myNavHostFragment)
@@ -29,11 +27,13 @@ class MainActivity : BaseActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
         NavigationUI.setupWithNavController(navView, navController)
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        setViews()
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            if (destination.id == controller.graph.startDestination) {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            } else {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -60,24 +60,5 @@ class MainActivity : BaseActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun setViews() {
-//        val selectedView: View?
-//        if (isTalkbackEnabled()) {
-//            selectedView = titleImage
-//            startButton.visibility = View.GONE
-//        } else {
-//            selectedView = startButton
-//        }
-//        selectedView?.setOnClickListener {
-//            val intent = Intent(this, RecognitionActivity::class.java)
-//            startActivity(intent)
-//        }
-    }
-
-    private fun isTalkbackEnabled(): Boolean {
-        val am = getSystemService(ACCESSIBILITY_SERVICE) as AccessibilityManager
-        return am.isEnabled && am.isTouchExplorationEnabled
     }
 }
