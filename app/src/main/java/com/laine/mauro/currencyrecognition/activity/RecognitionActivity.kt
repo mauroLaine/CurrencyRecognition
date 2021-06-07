@@ -50,7 +50,12 @@ class RecognitionActivity : BaseActivity() {
         val isWalletEnabled = readBooleanConfiguration(this, WALLET_KEY)
         val walletVisibility = when (isWalletEnabled) {
             true -> {
-                restartWalletButton.setOnClickListener { walletAmount = 0.0f }
+                restartWalletButton.setOnClickListener {
+                    walletAmount = 0.0f
+                    val walletAmountTemp = getString(R.string.total_amount, walletAmount)
+                    totalAmountDue.text = walletAmountTemp
+                    Toast.makeText(this, walletAmountTemp,  Toast.LENGTH_LONG).show()
+                }
                 walletAmount = 0.0f
                 View.VISIBLE
             }
