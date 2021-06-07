@@ -12,6 +12,9 @@
     <string name="wallet">Wallet</string>
     <string name="select_the_language">Sélectionnez la langue </string>
     <string name="language_changed">La langue a changé, veuillez redémarrer l\'application. </string>
+    <string name="restart_wallet">Le portefeuille est activé </string>
+    <string name="wallet_enabled">Portefeuille activé</string>
+    <string name="total_amount">Votre portefeuille a $%.02f  dollars </string>
 
     <!-- Currecny Values -->
     <string name="one_cent_us">un sou américain </string>

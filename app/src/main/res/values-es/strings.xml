@@ -12,6 +12,9 @@
     <string name="wallet">Wallet</string>
     <string name="select_the_language">Seleccione el idioma </string>
     <string name="language_changed">El idioma cambió, reinicie la aplicación. </string>
+    <string name="restart_wallet">Reiniciar wallet</string>
+    <string name="wallet_enabled">Wallet activada</string>
+    <string name="total_amount">Tu billetera tiene $%.02f  dólares </string>
 
     <!-- Currecny Values -->
     <string name="one_cent_us">un centavo estadounidense</string>
