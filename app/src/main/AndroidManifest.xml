@@ -18,13 +18,6 @@
             android:name=".activity.LanguageActivity"
             android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.SettingsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.AboutActivity"
-            android:screenOrientation="portrait" />
-
 
         <activity
             android:name=".activity.MainActivity"

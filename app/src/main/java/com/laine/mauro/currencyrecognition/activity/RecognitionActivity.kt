@@ -21,7 +21,6 @@ import com.laine.mauro.currencyrecognition.*
 import com.laine.mauro.currencyrecognition.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_recognition.*
-import kotlinx.android.synthetic.main.activity_settings.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
