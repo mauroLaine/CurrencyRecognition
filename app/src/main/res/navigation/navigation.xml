@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_home"></fragment>
 
     <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.laine.mauro.currencyrecognition.fragment.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
         android:id="@+id/aboutFragment"
         android:name="com.laine.mauro.currencyrecognition.fragment.AboutFragment"
         android:label="AboutFragment"
