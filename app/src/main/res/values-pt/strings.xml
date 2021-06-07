@@ -14,7 +14,7 @@
     <string name="language_changed">Idioma alterado, reinicie o aplicativo. </string>
     <string name="restart_wallet">Reiniciar carteira</string>
     <string name="wallet_enabled">Carteira habilitada</string>
-    <string name="total_amount">Sua carteira tem %.02f  dólares </string>
+    <string name="total_amount">Sua carteira tem $%.02f  dólares </string>
 
 
     <!-- Currecny Values -->
