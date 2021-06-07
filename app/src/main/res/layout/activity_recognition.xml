@@ -6,30 +6,58 @@
     android:layout_height="match_parent"
     tools:context=".activity.RecognitionActivity">
 
-    <TextView
-        android:id="@+id/camera_capture_text_view"
+    <Button
+        android:id="@+id/restartWalletButton"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
+        android:background="@color/ac_dark_blue"
+        android:text="@string/restart_wallet"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/totalAmountDue"
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
         android:background="@color/white"
         android:contentDescription=""
         android:elevation="2dp"
         android:padding="20dp"
         android:scaleType="fitCenter"
-        android:text="@string/camera_instructions"
+        android:text="@string/wallet_enabled"
+        android:textColor="@color/ac_dark_blue"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/restartWalletButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:text="Andas" />
+        tools:text="The amount in your wallet is $20 USD dollars" />
 
+
+    <TextView
+        android:id="@+id/cameraCaptureTextview"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@color/ac_gray_bg"
+        android:contentDescription=""
+        android:elevation="2dp"
+        android:padding="20dp"
+        android:scaleType="fitCenter"
+        android:text="@string/camera_instructions"
+        android:textColor="@color/ac_dark_blue"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/totalAmountDue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="This is one dollar bill" />
 
     <androidx.camera.view.PreviewView
         android:id="@+id/view_finder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-236dp" />
-
+        app:layout_constraintBottom_toTopOf="@+id/cameraCaptureTextview"
+        tools:layout_editor_absoluteX="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

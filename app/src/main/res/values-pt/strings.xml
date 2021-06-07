@@ -1,17 +1,21 @@
 <resources>
     <string name="app_name">Accessible Currency</string>
-    <string name="start">Inicio</string>
-    <string name="loading">Cargando...</string>
-    <string name="camera_instructions">Toque la pantalla para identificar la moneda o billete en la cámara </string>
-    <string name="object_not_found">No se econtró objeto.</string>
+    <string name="start">Começar</string>
+    <string name="loading">Carregando ...</string>
+    <string name="camera_instructions">Toque na tela para identificar a moeda ou nota na câmera </string>
+    <string name="object_not_found">Nenhum objeto foi encontrado. </string>
     <string name="this_is_a">Este es</string>
     <string name="about_content">Este projeto tem como objetivo fornecer uma ferramenta para que as pessoas do BLV melhorem sua interação com a moeda por meio de um aplicativo móvel em vários idiomas. \ N \ nOs cegos e deficientes visuais podem usar este aplicativo como uma ferramenta para identificar e gerenciar a quantidade de dinheiro que possuem em seu bolso. </string>
-    <string name="settings">Settings</string>
+    <string name="settings">Definições</string>
     <string name="about">Cerca</string>
     <string name="flashlight">Lanterna </string>
     <string name="wallet">Wallet</string>
     <string name="select_the_language">Selecione o idioma </string>
     <string name="language_changed">Idioma alterado, reinicie o aplicativo. </string>
+    <string name="restart_wallet">Reiniciar carteira</string>
+    <string name="wallet_enabled">Carteira habilitada</string>
+    <string name="total_amount">Sua carteira tem $%.02f  dólares </string>
+
 
     <!-- Currecny Values -->
     <string name="one_cent_us">un centavo estadounidense</string>

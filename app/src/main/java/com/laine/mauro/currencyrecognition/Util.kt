@@ -66,3 +66,27 @@ fun getStringResourceByName(activityContext: Activity, stringName: String): Stri
         activityContext.resources.getIdentifier(stringName, "string", activityContext.packageName)
     return activityContext.getString(resId)
 }
+
+fun getCurrencyValue(configurationKey: String): Float {
+    if (currencyValuesMap.get(configurationKey) != null) {
+        return currencyValuesMap.get(configurationKey)!!
+    }
+    return 0.0f
+}
+
+val currencyValuesMap = hashMapOf(
+    "one_cent_us" to 0.01f,
+    "five_cent_us" to 0.05f,
+    "ten_cent_us" to 0.10f,
+    "twenty_five_cent_us" to 0.25f,
+    "fifty_cent_us" to 0.50f,
+    "one_dollar_us" to 1.00f,
+    "two_dollar_us" to 2.00f,
+    "five_dollar_us" to 5.00f,
+    "ten_dollar_us" to 10.00f,
+    "twenty_dollar_us" to 20.00f,
+    "fifty_dollar_us" to 50.00f,
+    "one_hundred_us" to 100.00f,
+    "one_pound_egypt" to 1.00f,
+    "ten_euro" to 10.00f
+)

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.accessibility.AccessibilityEvent
 import android.widget.Toast
 import androidx.camera.core.*
@@ -16,12 +17,11 @@ import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeling
 import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
-import com.laine.mauro.currencyrecognition.FLASHLIGHT_KEY
+import com.laine.mauro.currencyrecognition.*
 import com.laine.mauro.currencyrecognition.R
-import com.laine.mauro.currencyrecognition.getStringResourceByName
-import com.laine.mauro.currencyrecognition.readBooleanConfiguration
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_recognition.*
+import kotlinx.android.synthetic.main.activity_settings.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -31,9 +31,9 @@ import java.util.concurrent.Executors
 
 class RecognitionActivity : BaseActivity() {
     private var imageCapture: ImageCapture? = null
-
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
+    private var walletAmount: Float = 0.0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +46,25 @@ class RecognitionActivity : BaseActivity() {
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
             )
         }
+        // Set up wallet visibility
+        val isWalletEnabled = readBooleanConfiguration(this, WALLET_KEY)
+        val walletVisibility = when (isWalletEnabled) {
+            true -> {
+                restartWalletButton.setOnClickListener {
+                    walletAmount = 0.0f
+                    val walletAmountTemp = getString(R.string.total_amount, walletAmount)
+                    totalAmountDue.text = walletAmountTemp
+                    Toast.makeText(this, walletAmountTemp,  Toast.LENGTH_LONG).show()
+                }
+                walletAmount = 0.0f
+                View.VISIBLE
+            }
+            false -> {
+                View.GONE
+            }
+        }
+        totalAmountDue.visibility = walletVisibility
+        restartWalletButton.visibility = walletVisibility
 
         // Set up the listener for take photo button
         view_finder.setOnClickListener { takePhoto() }
@@ -58,8 +77,8 @@ class RecognitionActivity : BaseActivity() {
     private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
-        camera_capture_text_view.text = getStringResourceByName(this as Activity, "loading")
-        camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
+        cameraCaptureTextview.text = getStringResourceByName(this as Activity, "loading")
+        cameraCaptureTextview.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
 
         // Create time-stamped output file to hold the image
         val photoFile = File(
@@ -109,23 +128,23 @@ class RecognitionActivity : BaseActivity() {
         labeler.process(inputImage)
             .addOnSuccessListener { labels ->
                 if (labels.isEmpty()) {
-                    camera_capture_text_view.text =
+                    cameraCaptureTextview.text =
                         getStringResourceByName(
                             this as Activity,
                             "object_not_found"
                         ) + " \r\n\n " + getStringResourceByName(
                             this as Activity, "camera_instructions"
                         )
-                    camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
+                    cameraCaptureTextview.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                     return@addOnSuccessListener
                 }
                 for (label in labels) {
                     val text = label.text
                     val confidence = label.confidence
                     val index = label.index
-                    val valueFromStrings = getStringResourceByName(this as Activity,text)
+                    val valueFromStrings = getStringResourceByName(this as Activity, text)
                     if (valueFromStrings.isNullOrBlank()) {
-                        camera_capture_text_view.text =
+                        cameraCaptureTextview.text =
                             getStringResourceByName(
                                 this as Activity,
                                 "object_not_found"
@@ -134,14 +153,18 @@ class RecognitionActivity : BaseActivity() {
                             )
                         return@addOnSuccessListener
                     }
-                    camera_capture_text_view.text =
+                    cameraCaptureTextview.text =
                         getStringResourceByName(
                             this as Activity,
                             "this_is_a"
                         ) + " " + valueFromStrings + ". \r\n\n " + getStringResourceByName(
                             this as Activity, "camera_instructions"
                         )
-                    camera_capture_text_view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
+                    if (walletAmount != null) {
+                        walletAmount += getCurrencyValue(text)
+                    }
+                    totalAmountDue.text = getString(R.string.total_amount, walletAmount)
+                    cameraCaptureTextview.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                 }
             }
             .addOnFailureListener { e ->

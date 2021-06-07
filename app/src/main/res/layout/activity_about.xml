@@ -8,10 +8,12 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="290dp"
-        android:layout_height="175dp"
+        android:layout_width="291dp"
+        android:layout_height="332dp"
         android:layout_marginTop="16dp"
         android:text="@string/about_content"
+        android:textColor="@color/ac_dark_blue_secondary"
+        android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
