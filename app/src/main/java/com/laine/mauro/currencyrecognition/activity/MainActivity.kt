@@ -20,8 +20,8 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        titleImage.contentDescription = this.getString(R.string.start)
-        titleImage.setAccessibleButton()
+//        titleImage.contentDescription = this.getString(R.string.start)
+//        titleImage.setAccessibleButton()
     }
 
     override fun onResume() {
@@ -51,17 +51,17 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setViews() {
-        val selectedView: View?
-        if (isTalkbackEnabled()) {
-            selectedView = titleImage
-            startButton.visibility = View.GONE
-        } else {
-            selectedView = startButton
-        }
-        selectedView?.setOnClickListener {
-            val intent = Intent(this, RecognitionActivity::class.java)
-            startActivity(intent)
-        }
+//        val selectedView: View?
+//        if (isTalkbackEnabled()) {
+//            selectedView = titleImage
+//            startButton.visibility = View.GONE
+//        } else {
+//            selectedView = startButton
+//        }
+//        selectedView?.setOnClickListener {
+//            val intent = Intent(this, RecognitionActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 
     private fun isTalkbackEnabled(): Boolean {
