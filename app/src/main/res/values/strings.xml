@@ -12,6 +12,10 @@
     <string name="wallet">Wallet</string>
     <string name="select_the_language">Select the language</string>
     <string name="language_changed">Language changed, please restart the app.</string>
+    <string name="restart_wallet">Restart wallet</string>
+    <string name="wallet_enabled">Wallet enabled</string>
+    <string name="total_amount">Your wallet has %.02f  dollars</string>
+
 
     <!-- Currency Values from ML model -->
     <string name="one_cent_us">one US cent</string>
