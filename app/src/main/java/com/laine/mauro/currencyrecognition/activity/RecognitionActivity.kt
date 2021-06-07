@@ -158,7 +158,7 @@ class RecognitionActivity : BaseActivity() {
                     if (walletAmount != null) {
                         walletAmount += getCurrencyValue(text)
                     }
-                    totalAmountDue.text = getString(R.string.total_amount, walletAmount, 0)
+                    totalAmountDue.text = getString(R.string.total_amount, walletAmount)
                     cameraCaptureTextview.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                 }
             }
