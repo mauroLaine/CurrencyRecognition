@@ -7,7 +7,9 @@ import android.view.MenuItem
 import android.view.View
 import android.view.accessibility.AccessibilityManager
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import com.laine.mauro.currencyrecognition.R
 import com.laine.mauro.currencyrecognition.setAccessibleButton
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,6 +24,12 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 //        titleImage.contentDescription = this.getString(R.string.start)
 //        titleImage.setAccessibleButton()
+
+        drawerLayout = findViewById(R.id.drawerLayout)
+        val navController = this.findNavController(R.id.myNavHostFragment)
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
+        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+
     }
 
     override fun onResume() {

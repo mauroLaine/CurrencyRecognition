@@ -2,9 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/SettingsActivity"
-        android:title="Settings" />
-    <item
-        android:id="@+id/AboutActivity"
-        android:title="About" />
+        android:id="@+id/aboutFragment"
+        android:title="@string/about" />
 </menu>

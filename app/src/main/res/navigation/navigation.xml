@@ -10,4 +10,10 @@
         android:name="com.laine.mauro.currencyrecognition.fragment.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home"></fragment>
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.laine.mauro.currencyrecognition.fragment.AboutFragment"
+        android:label="AboutFragment"
+        tools:layout="@layout/fragment_about" />
 </navigation>
