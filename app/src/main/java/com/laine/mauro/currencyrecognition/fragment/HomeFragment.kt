@@ -2,12 +2,12 @@ package com.laine.mauro.currencyrecognition.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.view.accessibility.AccessibilityManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.laine.mauro.currencyrecognition.R
 import com.laine.mauro.currencyrecognition.activity.RecognitionActivity
 import com.laine.mauro.currencyrecognition.setAccessibleButton
@@ -24,12 +24,22 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         view.titleImage.contentDescription = this.getString(R.string.start)
         view.titleImage.setAccessibleButton()
+        setHasOptionsMenu(true)
         return view
     }
 
     override fun onResume() {
         super.onResume()
         setViews()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.overflow_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController()) || super.onOptionsItemSelected(item)
     }
 
     private fun setViews() {

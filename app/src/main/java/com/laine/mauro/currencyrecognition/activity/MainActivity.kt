@@ -1,10 +1,6 @@
 package com.laine.mauro.currencyrecognition.activity
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.accessibility.AccessibilityManager
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -39,26 +35,5 @@ class MainActivity : BaseActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = this.findNavController(R.id.myNavHostFragment)
         return NavigationUI.navigateUp(navController, drawerLayout)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        getMenuInflater().inflate(R.menu.overflow_menu, menu);
-        return (super.onCreateOptionsMenu(menu));
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.getItemId()) {
-            R.id.AboutActivity -> {
-                val intent = Intent(this, AboutActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-            R.id.SettingsActivity -> {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 }
